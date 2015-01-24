@@ -85,7 +85,7 @@ def main():
                 s = split_text[1]  # second word after !kelman
                 if s == 'worship':
                     global praiseInt
-                    cmt.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praiseInt) + " times.")
+                    cmt.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praiseInt + 1) + " times.")
                     praiseInt += 1
                     print("Praises raised to: " + str(praiseInt))
                 elif s == 'fast':
