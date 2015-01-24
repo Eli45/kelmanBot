@@ -5,8 +5,7 @@ Read successful, file closed. Found: 0
 Getting subreddit kegkrusherkelman.
 Getting comments.
 Found comment calling !kelman: cnzly7j
-Cannot reply: rate limit encountered now sleeping for 600 seconds. (10.0 minutes
-)
+Cannot reply: rate limit encountered now sleeping for 600 seconds. (10.0 minutes)
 Backing up cache and praise count.
 Writing current comment ids to cache.
 Ids written to cache and file closed.
@@ -20,8 +19,7 @@ Replied to comment.
 Appending to cache.
 Appended comment id to cache.
 Found comment calling !kelman: cnzlair
-Cannot reply: rate limit encountered now sleeping for 600 seconds. (10.0 minutes
-)
+Cannot reply: rate limit encountered now sleeping for 600 seconds. (10.0 minutes)
 Backing up cache and praise count.
 Writing current comment ids to cache.
 Writing id: cnzly7j
