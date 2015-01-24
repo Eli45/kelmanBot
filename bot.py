@@ -13,6 +13,7 @@ call = '!kelman'
 # commands = ['worship', 'fast', 'god', 'king', 'certificate']
 # commands list is no longer used in preferation of just using logical statements.
 comment_cache = []
+praiseInt = 0
 
 
 def read_cache(cache_to_read='cache.commentCache'):
@@ -28,7 +29,7 @@ def read_cache(cache_to_read='cache.commentCache'):
 
 
 def write_cache(cache_to_write=comment_cache):
-    print("Writing comment id to cache.")
+    print("Writing current comment ids to cache.")
     file = open('cache.commentCache', 'w')
     # writes each comment id followed by a newline.
     for cache in cache_to_write:
@@ -43,7 +44,7 @@ def read_praise(praisefile='praises.praiseCount'):
     file = open(praisefile, 'r')
     int_praise = int(file.readline())
     file.close()
-    print("Read successful, file closed.")
+    print("Read successful, file closed. Found: " + str(int_praise))
     return int_praise
 
 
@@ -52,7 +53,7 @@ def write_praise(praisefile='praises.praiseCount'):
     file = open(praisefile, 'w')
     file.write(str(praiseInt))
     file.close()
-    print("Successful write, file closed.")
+    print("Successful write, file closed. Wrote: " + str(praiseInt))
 
 atexit.register(write_cache, cache_to_write=comment_cache)
 atexit.register(write_praise, praisefile='praises.praiseCount')
@@ -65,7 +66,12 @@ def append_comment(cmt_id):
     print("Appended comment id to cache.")
 
 
-def main(praises):
+def set_praise(int_to_set):
+    global praiseInt
+    praiseInt = int_to_set
+
+
+def main():
     print("Getting subreddit kegkrusherkelman.")
     sub_reddit = r.get_subreddit("kegkrusherkelman")
     print("Getting comments.")
@@ -78,8 +84,10 @@ def main(praises):
             try:
                 s = split_text[1]  # second word after !kelman
                 if s == 'worship':
-                    praises += 1
-                    cmt.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praises) + " times.")
+                    global praiseInt
+                    cmt.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praiseInt) + " times.")
+                    praiseInt += 1
+                    print("Praises raised to: " + str(praiseInt))
                 elif s == 'fast':
                     url = 'http://i.imgur.com/0ehC856.jpg'
                     cmt.reply("[gotta go fast](" + url + ")")
@@ -110,17 +118,20 @@ def main(praises):
 
 read_cache()
 praiseInt = read_praise()
+# Get comment cache and praise int.
 while True:
     try:
-        main(praiseInt)
+        main()
         write_cache()
+        write_praise()
         sleep = 10
         print("Sleeping for " + sleep + " seconds.")
         time.sleep(sleep)
     except praw.errors.RateLimitExceeded:
         sleep = 60 * 10
         minutes = sleep / 60
+        print("Cannot reply: rate limit encountered now sleeping for " + str(sleep) + " seconds. (" + str(minutes) + " minutes)")
+        print("Backing up cache and praise count.")
         write_cache()
         write_praise()
-        print("Rate limit encountered now sleeping for " + str(sleep) + " seconds. (" + str(minutes) + " minutes)")
         time.sleep(sleep)
