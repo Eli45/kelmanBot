@@ -10,3 +10,14 @@ Appending to cache.
 Appended comment id to cache.
 Found comment calling !kelman: cnzjxg3
 Rate limit encountered now sleeping for 600 seconds. (10.0 minutes)
+Getting subreddit kegkrusherkelman.
+Getting comments.
+Found comment calling !kelman: cnzly7j
+Replied to comment.
+Appending to cache.
+Appended comment id to cache.
+Found comment not containing kelman.
+Found comment not containing kelman.
+Found comment already in cache: cnzlair
+Found comment calling !kelman: cnzjxg3
+Rate limit encountered now sleeping for 600 seconds. (10.0 minutes)
