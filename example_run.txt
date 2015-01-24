@@ -1,0 +1,12 @@
+Reading comment cache.
+Read successful, file closed.
+Reading praise count.
+Read successful, file closed.
+Getting subreddit kegkrusherkelman.
+Getting comments.
+Found comment calling !kelman: cnzlair
+Replied to comment.
+Appending to cache.
+Appended comment id to cache.
+Found comment calling !kelman: cnzjxg3
+Rate limit encountered now sleeping for 600 seconds. (10.0 minutes)
