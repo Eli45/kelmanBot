@@ -82,16 +82,16 @@ def main(praises):
                     cmt.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praises) + " times.")
                 elif s == 'fast':
                     url = 'http://i.imgur.com/0ehC856.jpg'
-                    cmt.reply("(gotta go fast)[" + url + "]")
+                    cmt.reply("[gotta go fast](" + url + ")")
                 elif s == 'god':
                     # reply should theoretically be quite long.
                     cmt.reply('kelmanisgod' * 10)
                 elif s == 'king':
                     url = 'http://i.imgur.com/kCkHvlT.jpg'
-                    cmt.reply("(the king)[" + url + "]")
+                    cmt.reply("[the king](" + url + ")")
                 elif s == 'certificate':
                     url = 'http://i.imgur.com/qWGED8x.jpg'
-                    cmt.reply("(sik certs bro)[" + url + "]")
+                    cmt.reply("[sik certs bro](" + url + ")")
                 else:
                     cmt.reply('You high bro?')
                 print("Replied to comment.")
@@ -120,5 +120,7 @@ while True:
     except praw.errors.RateLimitExceeded:
         sleep = 60 * 10
         minutes = sleep / 60
+        write_cache()
+        write_praise()
         print("Rate limit encountered now sleeping for " + str(sleep) + " seconds. (" + str(minutes) + " minutes)")
         time.sleep(sleep)
