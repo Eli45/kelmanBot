@@ -26,3 +26,23 @@ Writing id: cnzly7j
 Ids written to cache and file closed.
 Writing praise count.
 Successful write, file closed. Wrote: 1
+Found comment already in cache: cnzjxdk
+Found comment already in cache: cnzjx8n
+Found comment already in cache: cnzjx58
+Found comment not containing kelman.
+Found comment not containing kelman.
+Found comment not containing kelman.
+Found comment not containing kelman.
+Found comment not containing kelman.
+Found comment not containing kelman.
+Writing current comment ids to cache.
+Writing id: cnzly7j
+Writing id: cnzlair
+Writing id: cnzjxg3
+Writing id: cnzjxdk
+Writing id: cnzjx8n
+Writing id: cnzjx58
+Ids written to cache and file closed.
+Writing praise count.
+Successful write, file closed. Wrote: 1
+Sleeping for 10 seconds.
