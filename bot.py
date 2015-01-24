@@ -125,7 +125,7 @@ while True:
         write_cache()
         write_praise()
         sleep = 10
-        print("Sleeping for " + sleep + " seconds.")
+        print("Sleeping for " + str(sleep) + " seconds.")
         time.sleep(sleep)
     except praw.errors.RateLimitExceeded:
         sleep = 60 * 10
