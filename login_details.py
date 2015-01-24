@@ -1,4 +1,6 @@
 __author__ = 'Eli'
 
-usernameKelman = "dsKelman"
-passwordKelman = "kelman"
+usernameKelman = "censored"
+passwordKelman = "censored"
+
+# CENSORED FOR OBVIOUS REASONS
