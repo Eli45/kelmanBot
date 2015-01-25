@@ -26,6 +26,7 @@ Writing id: cnzly7j
 Ids written to cache and file closed.
 Writing praise count.
 Successful write, file closed. Wrote: 1
+-----------------------------------------
 Found comment already in cache: cnzjxdk
 Found comment already in cache: cnzjx8n
 Found comment already in cache: cnzjx58
