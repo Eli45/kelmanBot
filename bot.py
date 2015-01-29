@@ -89,12 +89,10 @@ def reply_to_comments(split_text, comment):
         else:
             comment.reply('You high bro?')
             print("Replied to comment.")
-            append_comment(comment.id)
 
     except IndexError:
         comment.reply("What do you want from me?")
         print("Replied to comment referencing kelman with incorrect parameters.")
-        append_comment(comment.id)
 
     append_comment(comment)
 
