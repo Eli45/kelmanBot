@@ -71,7 +71,37 @@ def set_praise(int_to_set):
     praiseInt = int_to_set
 
 
-def main():
+def reply_to_comments(split_text, comment):
+    try:
+        s = split_text[1]  # second word after !kelman
+        if s == 'worship':
+            global praiseInt
+            praiseInt += 1
+            comment.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praiseInt) + " times.")
+            print("Praises raised to: " + str(praiseInt))
+        elif s == 'fast':
+            url = 'http://i.imgur.com/0ehC856.jpg'
+            comment.reply("[gotta go fast](" + url + ")")
+        elif s == 'god':
+            comment.reply('kelmanisgod' * 10)
+        elif s == 'king':
+            url = 'http://i.imgur.com/kCkHvlT.jpg'
+            comment.reply("[the king](" + url + ")")
+        elif s == 'certificate':
+            url = 'http://i.imgur.com/qWGED8x.jpg'
+            comment.reply("[sik certs bro](" + url + ")")
+        else:
+            comment.reply('You high bro?')
+            print("Replied to comment.")
+            append_comment(comment.id)
+
+    except IndexError:
+        comment.reply("What do you want from me?")
+        print("Replied to comment referencing kelman with incorrect parameters.")
+        append_comment(comment.id)
+
+
+def get_comments():
     print("Getting subreddit kegkrusherkelman.")
     sub_reddit = r.get_subreddit("kegkrusherkelman")
     print("Getting comments.")
@@ -80,35 +110,7 @@ def main():
         text = cmt.body.lower()
         if text.startswith(call) and cmt.id not in comment_cache:
             print("Found comment calling !kelman: " + str(cmt.id))
-            split_text = text.split()
-            try:
-                s = split_text[1]  # second word after !kelman
-                if s == 'worship':
-                    global praiseInt
-                    cmt.reply("I accept your praise loyal follower of Kelman.\nI have been worshipped " + str(praiseInt + 1) + " times.")
-                    praiseInt += 1
-                    print("Praises raised to: " + str(praiseInt))
-                elif s == 'fast':
-                    url = 'http://i.imgur.com/0ehC856.jpg'
-                    cmt.reply("[gotta go fast](" + url + ")")
-                elif s == 'god':
-                    # reply should theoretically be quite long.
-                    cmt.reply('kelmanisgod' * 10)
-                elif s == 'king':
-                    url = 'http://i.imgur.com/kCkHvlT.jpg'
-                    cmt.reply("[the king](" + url + ")")
-                elif s == 'certificate':
-                    url = 'http://i.imgur.com/qWGED8x.jpg'
-                    cmt.reply("[sik certs bro](" + url + ")")
-                else:
-                    cmt.reply('You high bro?')
-                print("Replied to comment.")
-                append_comment(cmt.id)
-
-            except IndexError:
-                cmt.reply("What do you want from me?")
-                print("Replied to parameter of comment referencing kelman.")
-                append_comment(cmt.id)
+            reply_to_comments(text.split(), cmt)
 
         elif cmt.id in comment_cache:
             print("Found comment already in cache: " + cmt.id)
@@ -116,22 +118,33 @@ def main():
         else:
             print("Found comment not containing kelman.")
 
-read_cache()
-praiseInt = read_praise()
-# Get comment cache and praise int.
-while True:
-    try:
-        main()
-        write_cache()
-        write_praise()
-        sleep = 10
-        print("Sleeping for " + str(sleep) + " seconds.")
-        time.sleep(sleep)
-    except praw.errors.RateLimitExceeded:
-        sleep = 60 * 10
-        minutes = sleep / 60
-        print("Cannot reply: rate limit encountered now sleeping for " + str(sleep) + " seconds. (" + str(minutes) + " minutes)")
-        print("Backing up cache and praise count.")
-        write_cache()
-        write_praise()
-        time.sleep(sleep)
+
+def write_files():
+    write_cache()
+    write_praise()
+
+
+if __name__ == "__main__":
+    read_cache()
+    global praiseInt
+    praiseInt = read_praise()
+    # Get comment cache and praise int.
+    while True:
+        sleep_time = 0
+        error = False
+        try:
+            get_comments()
+            sleep_time = 10
+
+        except praw.errors.RateLimitExceeded:
+            sleep_time = 60 * 10
+            error = True
+
+        print("Now backing up cache and praiseCount.")
+        write_files()
+
+        if error:
+            print("Cannot reply: rate limit encountered.")
+
+        print("Now sleeping for: " + str(sleep_time) + " seconds (" + str(sleep_time/60) + " minutes).")
+        time.sleep(sleep_time)
