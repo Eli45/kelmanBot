@@ -135,11 +135,12 @@ if __name__ == "__main__":
             sleep_time = 60 * 10
             error = True
 
+        if error:
+            print("Cannot reply: rate limit encountered.")
+
         print("Now backing up cache and praiseCount.")
         write_files(praiseInt)
 
-        if error:
-            print("Cannot reply: rate limit encountered.")
 
         print("Now sleeping for: " + str(sleep_time) + " seconds (" + str(sleep_time/60) + " minutes).")
         time.sleep(sleep_time)
